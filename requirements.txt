@@ -1,0 +1,3 @@
+python-dotenv>=0.10.*
+requests==2.21.*
+terminaltables==3.1.*
