@@ -29,7 +29,7 @@ def find_hh_area_recursive(areas, text):
     for area in areas:
         if area['name'] == text:
             return area['id']
-        if len(area['areas']) > 0:
+        if area['areas']:
             area_id = find_hh_area_recursive(area['areas'], text)
             if area_id is not None:
                 return area_id
@@ -150,8 +150,11 @@ def print_table(vacancies, title):
     table_data = [
         ('Язык программирования', 'Найдено вакансий', 'Обработано вакансий', 'Средняя зарплата, руб.')
     ]
-    for language in vacancies:
-        table_data.append([language, ] + list(x[1] for x in vacancies[language].items()))
+    for language, stat in vacancies.items():
+        table_data.append([language,
+                           stat['vacancies_found'],
+                           stat['vacancies_processed'],
+                           stat['average_salary']])
     table = terminaltables.AsciiTable(table_data, title)
     print(table.table)
 
